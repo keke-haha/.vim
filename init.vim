@@ -111,6 +111,12 @@ Plug 'junegunn/fzf.vim'
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Code commenter
+Plug 'preservim/nerdcommenter'
+
 call plug#end()
 
 " ********************************************************************************************************************************
@@ -258,14 +264,81 @@ nmap eq :CocCommand explorer --quit-on-open<CR>
 
 
 " ***
+" Markdown Preview Setting
+" ***
+" nvim will open the preview window after entering the markdown buffer
+let g:mkdp_auto_start = 0
+" auto refresh markdown as you edit or move the cursor
+let g:mkdp_refresh_slow = 0
+" the MarkdownPreview only can be use in markdown file
+let g:mkdp_command_for_global = 0
+" use custom IP to open preview page, default is 127.0.0.1
+let g:mkdp_open_ip = '127.0.0.1'
+" specify browser to open preview page
+" let g:mkdp_browser = ''
+" use a custom markdown style must be absolute path
+let g:mkdp_markdown_css = '~/.config/Typora/themes/whitey.css'
+" preview page title
+let g:mkdp_page_title = '「${name}」'
+" use a custom port to start server or random for empty
+let g:mkdp_port = '2020'
+" options for markdown render
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false
+    \ }
+" MarkdownPreview key mappings
+nmap <LEADER>ss <Plug>MarkdownPreview
+nmap <LEADER>se <Plug>MarkdownPreviewStop
+nmap <LEADER>st <Plug>MarkdownPreviewToggle
+
+
+" ***
+" nerdcommenter
+" ***
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+" key mappings setting
+" Comment out the current line or text selected in visual mode.
+nmap <LEADER>cc <Plug>NERDCommenterComment<CR>
+" Forces nesting comment out the current line or text selected in visual mode.
+nmap <LEADER>ci <Plug>NERDCommenterNested<CR>
+" Uncomments the selected line(s).
+nmap <LEADER>cu <Plug>NERDCommenterUncomment<CR>
+
+
+" **
 " Color scheme
 " ***
 " colorscheme palenight
-" colorscheme nord
+colorscheme nord
 " colorscheme onedark
-colorscheme neodark
-hi Normal ctermbg=none
-let g:ctermbg_flag = 1
+" colorscheme neodark
+" hi Normal ctermbg=none
+hi Normal ctermbg=235
+let g:ctermbg_flag = 0
 func! ChangeBackground()
   if g:ctermbg_flag == 0
     hi Normal ctermbg=none
@@ -278,8 +351,8 @@ endfunction
 " hi Normal ctermfg=252 ctermbg=none
 " nmap bn :hi Normal ctermbg=none<CR>
 " nmap bb :set background=dark<CR>
-nmap bb :call ChangeBackground()<CR>
-nmap bc :Colors<CR>
+nmap <LEADER>bb :call ChangeBackground()<CR>
+nmap <LEADER>bt :Colors<CR>
 
 
 " ********************************************************************************************************************************
