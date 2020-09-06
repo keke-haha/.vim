@@ -1,15 +1,15 @@
 {
   //  "clangd.path": "/bin/gcc",
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "java.jdt.ls.home": "/usr/share/java/jdtls/plugins/org.eclipse.jdt.launching_3.17.100.v20200526-1503.jar",
-  // "java.home": "/usr/lib/jvm/default",
-  "java.completion.enabled": true,
-  "java.configuration.runtimes": [
-    {
-      "name": "JavaSE-11",
-      "path": "/usr/lib/jvm/java-11-openjdk"
-    }
-  ],
+  //  "java.jdt.ls.home": "/usr/share/java/jdtls/plugins/org.eclipse.jdt.launching_3.17.100.v20200526-1503.jar",
+  //  // "java.home": "/usr/lib/jvm/default",
+  //  "java.completion.enabled": true,
+  //  "java.configuration.runtimes": [
+  //    {
+  //      "name": "JavaSE-11",
+  //      "path": "/usr/lib/jvm/java-11-openjdk"
+  //    }
+  //  ],
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
   "suggest.timeout": 5000,

@@ -1,5 +1,5 @@
 let mapleader=" "
-syntax on   
+syntax on
 set number
 set wrap
 set showcmd
@@ -104,6 +104,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim'
+Plug 'Rigellute/shades-of-purple.vim'
 
 " file navigation
 Plug 'junegunn/fzf.vim'
@@ -116,6 +117,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Code commenter
 Plug 'preservim/nerdcommenter'
+
+" Java complete
+Plug 'artur-shaik/vim-javacomplete2'
 
 call plug#end()
 
@@ -135,6 +139,18 @@ call plug#end()
 " ********************************************************************************************************************************
 " ********************************************************************************************************************************
 " ********************************************************************************************************************************
+
+
+
+" ***
+" JavaComplete2 Setting
+" ***
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" let g:JavaComplete_EnableDefaultMappings = 0
+" nmap `ji <Plug>(JavaComplete-Imports-AddSmart)
+" nmap `jr <Plug>(JavaComplete-Imports-RemoveUnused)
+
+
 
 " ***
 " FZF Setting
@@ -173,8 +189,8 @@ let g:coc_global_extensions = [
   \ 'coc-vimlsp',
   \ 'coc-marketplace',
   \ 'coc-tsserver',
-  \ 'coc-python',
-  \ 'coc-java']
+  \ 'coc-python']
+
 inoremap <silent><expr> <TAB>
 	\ pumvisible() ? "\<C-n>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
@@ -328,15 +344,25 @@ nmap <LEADER>ci <Plug>NERDCommenterNested<CR>
 " Uncomments the selected line(s).
 nmap <LEADER>cu <Plug>NERDCommenterUncomment<CR>
 
+" ***
+" airline
+" ***
+let g:shades_of_purple_airline = 1
+let g:airline_theme='shades_of_purple'
+
 
 " **
 " Color scheme
 " ***
 " colorscheme palenight
-colorscheme nord
+" colorscheme nord
 " colorscheme onedark
 " colorscheme neodark
-" hi Normal ctermbg=none
+" colorscheme desert
+" hi Normal ctermbg=none      " 背景变透明
+" set termguicolors
+colorscheme shades_of_purple
+
 hi Normal ctermbg=235
 let g:ctermbg_flag = 0
 func! ChangeBackground()
@@ -439,3 +465,12 @@ func CppInit()
 endfunc
 
 autocmd BufNewFile * normal G'
+
+" To my vimrc
+func! ToMyVimrc()
+  set splitright
+  vsplit
+  e ~/.config/nvim/init.vim
+endfunc
+nmap <LEADER>mv :call ToMyVimrc()<CR>
+" nmaP tmv :e ~/.config/nvim/init.vim<CR>
