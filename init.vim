@@ -105,6 +105,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'Rigellute/shades-of-purple.vim'
+Plug 'liuchengxu/space-vim-dark'
 
 " file navigation
 Plug 'junegunn/fzf.vim'
@@ -362,13 +363,14 @@ let g:airline_theme='shades_of_purple'
 " colorscheme palenight
 " colorscheme nord
 " colorscheme onedark
-colorscheme neodark
+" colorscheme neodark
 " colorscheme desert
 " hi Normal ctermbg=none      " 背景变透明
 " set termguicolors
 " colorscheme shades_of_purple
+colorscheme space-vim-dark
 
-hi Normal ctermbg=235
+" hi Normal ctermbg=240
 let g:ctermbg_flag = 0
 func! ChangeBackground()
   if g:ctermbg_flag == 0
