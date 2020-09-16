@@ -195,6 +195,7 @@ let g:coc_global_extensions = [
   \ 'coc-marketplace',
   \ 'coc-tsserver',
   \ 'coc-java',
+  \ 'coc-clangd',
   \ 'coc-python']
 
 inoremap <silent><expr> <TAB>
@@ -471,6 +472,27 @@ func CppInit()
   endif
 endfunc
 
+"每次创建Java文件都会初始化一些内容
+autocmd BufNewFile *.java exec ":call JavaInit()"
+func JavaInit()
+  if expand("%:e") == "java"
+    call setline(1,"/*")
+    call setline(2,"*******************************************************************")
+    call setline(3,"Author:                Sun")
+    call setline(4,"Date:                  ".strftime("%Y-%m-%d"))
+    call setline(5,"FileName：             ".expand("%"))
+    call setline(6,"Copyright (C):         ".strftime("%Y")." All rights reserved")
+    call setline(7,"*******************************************************************")
+    call setline(8,"*/")
+    call setline(9, "")
+    call setline(10, "public class ".expand("%<")." {")
+    call setline(11, "  public static void main (String [] args) {")
+    call setline(12, "  }")
+    call setline(13, "}")
+  endif
+endfunc
+
+
 autocmd BufNewFile * normal G'
 
 " To my vimrc
@@ -480,4 +502,4 @@ func! ToMyVimrc()
   e ~/.config/nvim/init.vim
 endfunc
 nmap <LEADER>mv :call ToMyVimrc()<CR>
-" nmaP tmv :e ~/.config/nvim/init.vim<CR>
+" nmap tmv :e ~/.config/nvim/init.vim<CR>
